@@ -3,12 +3,18 @@ import time
 import random
 import os
 
-# API Configuration
+# Function to get the API key from the user
+def get_api_key():
+    api_key = input("Please enter your API key: ")
+    return api_key
+
+# API Configuration (API key will be provided by the user)
 URL = "https://api.hyperbolic.xyz/v1/chat/completions"
-HEADERS = {
-    "Content-Type": "application/json",
-    "Authorization": "Bearer "
-}
+def get_headers(api_key):
+    return {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {api_key}"
+    }
 
 # Available models list
 models = {
@@ -20,7 +26,7 @@ models = {
 }
 
 # Function to send API request based on the selected model
-def send_chat_request(question, model_choice):
+def send_chat_request(question, model_choice, headers):
     model_name = models[model_choice]
     
     data = {
@@ -37,7 +43,7 @@ def send_chat_request(question, model_choice):
     }
     
     try:
-        response = requests.post(URL, headers=HEADERS, json=data)
+        response = requests.post(URL, headers=headers, json=data)
         response.raise_for_status()
         result = response.json()
         answer = result['choices'][0]['message']['content']
@@ -71,14 +77,18 @@ def read_questions_from_file(file_path="q.txt"):
 
 # Main bot loop
 def run_chat_bot():
-    # Step 1: Create the q.txt file (if it doesn't exist) and instruct the user to add questions manually.
+    # Step 1: Get the API key from the user
+    api_key = get_api_key()
+    headers = get_headers(api_key)
+
+    # Step 2: Create the q.txt file (if it doesn't exist) and instruct the user to add questions manually.
     create_qtxt_file()
 
     # Wait for 30 seconds to give the user time to add questions
     print("\nWaiting for 30 seconds to allow you to add questions...")
-    time.sleep(30)
+    time.sleep(10)
 
-    # Step 2: After the wait, check if the file exists and read the questions
+    # Step 3: After the wait, check if the file exists and read the questions
     print("\nReading questions from the q.txt file...")
     questions = read_questions_from_file()
     
@@ -107,7 +117,7 @@ def run_chat_bot():
     for i, question in enumerate(available_questions):  # Use the available questions
         # Send request and print results
         print(f"\nQuestion {i + 1}: {question}")
-        answer = send_chat_request(question, model_choice)
+        answer = send_chat_request(question, model_choice, headers)
         print(f"Answer: {answer}")
         
         # Random delay between 1-2 minutes (60-120 seconds)
