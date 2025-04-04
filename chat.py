@@ -1,6 +1,7 @@
 import requests
 import time
 import random
+import os
 
 # API Configuration
 URL = "https://api.hyperbolic.xyz/v1/chat/completions"
@@ -44,13 +45,53 @@ def send_chat_request(question, model_choice):
     except Exception as e:
         return f"Error: {str(e)}"
 
+# Function to create the q.txt file with two sample questions if it doesn't exist
+def create_qtxt_file(file_path="q.txt"):
+    if not os.path.exists(file_path):
+        with open(file_path, 'w') as file:
+            file.write('"What is the impact of global warming?", "How does urbanization affect climate?"')
+        print(f"The 'q.txt' file has been created at {file_path} with sample questions.")
+        print("Please add your questions in the same format (each question enclosed in quotes and separated by commas).")
+        print("After adding your questions, save the file and restart the bot.")
+    else:
+        print(f"Found 'q.txt' file at {file_path}. Now, reading the questions...")
+
+# Function to read questions from the file
+def read_questions_from_file(file_path="q.txt"):
+    with open(file_path, 'r') as file:
+        questions_input = file.read()
+
+    # Split questions by commas, strip out extra spaces and quotes
+    questions = [q.strip().strip('"') for q in questions_input.split(',') if q.strip()]
+
+    # Filter out questions that don't end with a "?"
+    valid_questions = [q for q in questions if q.endswith('?')]
+
+    return valid_questions
+
 # Main bot loop
 def run_chat_bot():
-    print("Available models:")
+    # Step 1: Create the q.txt file (if it doesn't exist) and instruct the user to add questions manually.
+    create_qtxt_file()
+
+    # Wait for 30 seconds to give the user time to add questions
+    print("\nWaiting for 30 seconds to allow you to add questions...")
+    time.sleep(30)
+
+    # Step 2: After the wait, check if the file exists and read the questions
+    print("\nReading questions from the q.txt file...")
+    questions = read_questions_from_file()
+    
+    # If no valid questions are found, notify the user
+    if len(questions) == 0:
+        print("No valid questions found in the file. Please ensure each question ends with a '?'.")
+        return
+
+    # Ask the user to choose a model
+    print("\nAvailable models:")
     for key, model in models.items():
         print(f"{key}. {model}")
     
-    # Ask the user to choose a model
     model_choice = input("Please select a model (1-5): ")
     if model_choice not in models:
         print("Invalid choice. Exiting.")
@@ -59,32 +100,11 @@ def run_chat_bot():
     selected_model = models[model_choice]
     print(f"Selected model: {selected_model}")
     
-    # Ask for 100 questions
-    print("Please enter 100 questions (each ending with a '?'):")
-    questions = []
-    for i in range(100):
-        question = input(f"Enter question {i+1}: ")
-        while not question.endswith('?'):
-            print(f"Question {i+1} must end with a '?'. Please try again.")
-            question = input(f"Enter question {i+1}: ")
-        questions.append(question)
-    
-    # Verify we have 100 questions
-    print(f"Total questions loaded: {len(questions)}")
-
     # Run through the questions and get answers
     print("\nStarting automated chat bot...")
     available_questions = questions.copy()
-    
-    for i in range(100):  # Fixed to 100 since we have exactly 100 questions
-        if not available_questions:
-            print("Ran out of questions unexpectedly!")
-            break
-        
-        # Pick and remove a random question to avoid repetition
-        question = random.choice(available_questions)
-        available_questions.remove(question)
-        
+
+    for i, question in enumerate(available_questions):  # Use the available questions
         # Send request and print results
         print(f"\nQuestion {i + 1}: {question}")
         answer = send_chat_request(question, model_choice)
@@ -95,7 +115,7 @@ def run_chat_bot():
         print(f"Waiting {delay:.1f} seconds before next question...")
         time.sleep(delay)
     
-    print("\nCompleted 100 questions!")
+    print("\nCompleted all questions!")
 
 # Run the bot
 if __name__ == "__main__":
