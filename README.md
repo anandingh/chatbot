@@ -25,5 +25,5 @@ nano q.txt
 ```
 - Node js and npm installation command
 ```bash
-python3 chatbot.py
+python3 chat.py
 ```
