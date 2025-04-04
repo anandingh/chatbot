@@ -7,7 +7,7 @@ import os
 URL = "https://api.hyperbolic.xyz/v1/chat/completions"
 HEADERS = {
     "Content-Type": "application/json",
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzaW5naGFuYW5kMzAyNzNAZ21haWwuY29tIn0.wsc9OccMPpTpsHTrqK3HNrfaOQGdaQjyf-XEiPN-rNg"
+    "Authorization": "Bearer "
 }
 
 # Available models list
