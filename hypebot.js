@@ -197,12 +197,15 @@ bot.command('remove', (ctx) => {
 bot.command('bulk', (ctx) => {
   ctx.session.bulkQuestions = [];
   ctx.session.collecting = true;
-  ctx.reply('📝 Send your questions separated by commas:', {
+  ctx.session.stopBulk = false;
+  ctx.reply('📝 Please *enter your bulk questions now*, separated by commas. Once finished, press ✅ Done below.', {
+    parse_mode: 'Markdown',
     reply_markup: {
       inline_keyboard: [[{ text: '✅ Done', callback_data: 'bulk_done' }]]
     }
   });
 });
+
 
 bot.command('stop', (ctx) => {
   ctx.session.stopBulk = true;
