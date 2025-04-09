@@ -1,3 +1,20 @@
+# TG
+
+- installation command
+```bash
+npm install axios@^1.8.3 dotenv@^16.4.7 telegraf@^4.16.3 telegraf-session-local@^2.1.1
+```
+- nstall screen and nano package
+```bash
+sudo apt update && sudo apt install -y screen nano
+```
+
+
+
+
+
+
+
 # chatbot
 
 - installation command
