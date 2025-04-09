@@ -38,17 +38,16 @@ const models = {
       maxTokens: 5400,
       temperature: 0.1,
       topP: 0.9
-    }
-    'qwen 2.5': {
+    },
+    'hermes': {
       displayName: '💻 Qwen2.5-72B-Instruct',
       apiModelName: 'Qwen/Qwen2.5-72B-Instruct',
       maxTokens: 11450,
       temperature: 0.7,
       topP: 0.9
-    }
-}
+    },
     'meta-llama3.1': {
-      displayName: '💻 meta-llama/Meta-Llama-3.1-405B',
+      displayName: '💻 Meta-Llama-3.1-405B',
       apiModelName: 'meta-llama/Meta-Llama-3.1-405B',
       maxTokens: 11450,
       temperature: 0.7,
