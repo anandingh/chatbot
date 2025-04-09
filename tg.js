@@ -14,35 +14,55 @@ const models = {
     'meta_llama': {
       displayName: '🦙 Meta Llama 3.1 8B',
       apiModelName: 'meta-llama/Meta-Llama-3.1-8B-Instruct',
-      maxTokens: 2048,
+      maxTokens: 11002,
       temperature: 0.7,
       topP: 0.9
     },
     'deepseek': {
       displayName: '🔍 DeepSeek V3',
       apiModelName: 'deepseek-ai/DeepSeek-V3',
-      maxTokens: 512,
+      maxTokens: 13540,
       temperature: 0.1,
       topP: 0.9
     },
     'hermes': {
       displayName: '⚡ Hermes-3-Llama-3.1-70B',
       apiModelName: 'NousResearch/Hermes-3-Llama-3.1-70B',
-      maxTokens: 2048,
+      maxTokens: 6522,
       temperature: 0.7,
       topP: 0.9
     },
     'qwen': {
       displayName: '💻 Qwen2.5-Coder-32B-Instruct',
       apiModelName: 'Qwen/Qwen2.5-Coder-32B-Instruct',
-      maxTokens: 512,
+      maxTokens: 5400,
       temperature: 0.1,
+      topP: 0.9
+    }
+    'qwen 2.5': {
+      displayName: '💻 Qwen2.5-72B-Instruct',
+      apiModelName: 'Qwen/Qwen2.5-72B-Instruct',
+      maxTokens: 11450,
+      temperature: 0.7,
+      topP: 0.9
+    }
+}
+    'meta-llama3.1': {
+      displayName: '💻 meta-llama/Meta-Llama-3.1-405B',
+      apiModelName: 'meta-llama/Meta-Llama-3.1-405B',
+      maxTokens: 11450,
+      temperature: 0.7,
       topP: 0.9
     }
   },
   image: {
     'flux': { displayName: '🎨 FLUX.1-dev', apiModelName: 'FLUX.1-dev' },
-    'sd2': { displayName: '🖼️ SD2', apiModelName: 'SD2' }
+    'sd2': { displayName: '🖼️ SD2', apiModelName: 'SD2' },
+    'SDXL1.0-base': { displayName: '🖼️ SDXL1.0-base', apiModelName: 'SDXL1.0-base' },
+    'SD1.5': { displayName: '🖼️ SD1.5', apiModelName: 'SD1.5' },
+    'SSD': { displayName: '🖼️ SSD', apiModelName: 'SSD' },
+    'SDXL-turbo': { displayName: '🖼️ SDXL-turbo', apiModelName: 'SDXL-turbo' },
+    
   },
   audio: {
     'melo_tts': { displayName: '🔊 Melo TTS' }
