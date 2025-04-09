@@ -4,12 +4,19 @@
 ```bash
 npm install axios@^1.8.3 dotenv@^16.4.7 telegraf@^4.16.3 telegraf-session-local@^2.1.1
 ```
+
+- installation command
+```bash
+curl -sSL https://raw.githubusercontent.com/zunxbt/installation/main/node.sh | bash
+```
+
 - nstall screen and nano package
 ```bash
 sudo apt update && sudo apt install -y screen nano
 ```
-
-
+- nstall screen and nano package
+```bash
+rm -rf chatbot && git clone https://github.com/anandingh/chatbot.git && cd chatbot```
 
 
 
