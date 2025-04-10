@@ -193,7 +193,7 @@ async function processBulkQuestions(ctx) {
     await handleModelInput(ctx, question);
     remaining.delete(question);
 
-    const delayMs = Math.floor(Math.random() * (240000 - 60000 + 1)) + 60000;
+    const delayMs = Math.floor(Math.random() * (120000 - 60000 + 1)) + 60000;
     console.log(`⏱️ Waiting ${Math.round(delayMs / 1000)} seconds until next question...`);
     await delay(delayMs);
   }
